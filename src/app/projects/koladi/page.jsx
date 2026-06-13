@@ -11,8 +11,8 @@ const project = {
   role: "Fullstack Developer",
   recognition: "Project-Based Learning Project",
   image: "/projects/koladi/koladi-logo.png",
-  demoLink: "https://link-demo-video-koladi-kamu.com",
-  githubLink: "https://github.com/rendisinaga/koladi",
+  demoLink: "https://youtu.be/C5XAo3Xbvwc?si=4kpJXxTmvIuYM_KR",
+  githubLink: "https://github.com/Dzakwan993/koladi",
   overview:
     "Koladi is a web-based virtual workspace platform designed to help teams manage tasks, announcements, chats, schedules, documents, and performance reports in one centralized system.",
   problem:
@@ -67,6 +67,16 @@ const gallery = [
     title: "Workspace Menu",
     type: "Screenshot",
     image: "/projects/koladi/workspace.png",
+  },
+  {
+    title: "Role-Based Access",
+    type: "Screenshot",
+    image: "/projects/koladi/role.png",
+  },
+  {
+    title: "Poster",
+    type: "Poster",
+    image: "/projects/koladi/koladi-poster.png",
   },
 ];
 

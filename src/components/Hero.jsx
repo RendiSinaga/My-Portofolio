@@ -127,8 +127,8 @@ export default function Hero() {
             <div
               className="relative flex items-center justify-center"
               style={{
-                width: "clamp(250px, 62vw, 410px)",
-                height: "clamp(250px, 62vw, 410px)",
+                width: "clamp(260px, 58vw, 440px)",
+                height: "clamp(260px, 58vw, 440px)",
               }}
             >
               {/* Orbit rings */}
@@ -185,10 +185,10 @@ export default function Hero() {
               <div
                 className="relative z-10 overflow-hidden rounded-full"
                 style={{
-                  width: "clamp(175px, 45vw, 300px)",
-                  height: "clamp(175px, 45vw, 300px)",
+                  width: "clamp(190px, 42vw, 330px)",
+                  height: "clamp(190px, 42vw, 330px)",
                   border: "2px solid rgba(56,189,248,0.4)",
-                  boxShadow: "0 0 48px rgba(14,165,233,0.25)",
+                  boxShadow: "0 0 52px rgba(14,165,233,0.28)",
                 }}
               >
                 <Image
@@ -196,32 +196,10 @@ export default function Hero() {
                   alt="Rendi Sinaga"
                   fill
                   priority
-                  sizes="(max-width: 768px) 175px, 300px"
+                  sizes="(max-width: 768px) 190px, 330px"
                   className="object-cover object-top"
                 />
               </div>
-
-              {/* Badge */}
-              <motion.div
-                className="absolute z-20 flex items-center gap-2 rounded-full font-semibold text-cyan-200"
-                style={{
-                  bottom: "-8px",
-                  left: "50%",
-                  translateX: "-50%",
-                  padding: "8px 18px",
-                  fontSize: "0.72rem",
-                  background: "rgba(6,182,212,0.12)",
-                  border: "1px solid rgba(6,182,212,0.3)",
-                  backdropFilter: "blur(12px)",
-                  WebkitBackdropFilter: "blur(12px)",
-                  whiteSpace: "nowrap",
-                }}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9 }}
-              >
-                💻 Software Developer
-              </motion.div>
             </div>
           </motion.div>
         </div>

@@ -16,10 +16,10 @@ const projects = [
   },
   {
     title: "Koladi",
-    category: "Virtual Office Platform",
+    category: "Web Application",
     image: "/projects/koladi/dashboard.png",
     description:
-      "A collaboration platform for managing tasks, meetings, attendance, files, and team productivity.",
+      "A virtual workspace platform for managing tasks, meetings, attendance, files, and team collaboration.",
     role: "Fullstack Developer",
     stack: ["Laravel", "PostgreSQL", "Tailwind"],
     highlight: "Remote Team Workspace",
@@ -27,10 +27,10 @@ const projects = [
   },
   {
     title: "FabricMatch",
-    category: "IoT & Mobile App",
-    image: "/projects/fabricmatch/preview.png",
+    category: "Mobile & IoT App",
+    image: "/projects/fabricmatch/home.png",
     description:
-      "An IoT-based system that matches fabric colors with suitable sewing thread recommendations.",
+      "An IoT-based mobile app that scans fabric colors and recommends suitable sewing threads.",
     role: "Team Lead & IoT Developer",
     stack: ["ESP8266", "TCS3200", "Kotlin"],
     highlight: "IoT Color Matching",
@@ -38,24 +38,24 @@ const projects = [
   },
   {
     title: "DokterOnTime",
-    category: "Clinic Management System",
-    image: "/projects/dokterontime/preview.png",
+    category: "Web Application",
+    image: "/projects/dokterontime/dashboard.png",
     description:
-      "A clinic management concept for appointment scheduling, queues, medical records, and prescriptions.",
-    role: "Project Developer",
+      "A clinic management system for handling appointments, services, patient visits, and dashboard reports.",
+    role: "Web Developer",
     stack: ["Laravel", "MySQL", "PHP"],
     highlight: "PKM-KC Funded Project",
     link: "/projects/dokterontime",
   },
   {
     title: "EduFarm",
-    category: "Mobile Application",
-    image: "/projects/edufarm/preview.png",
+    category: "Mobile Learning App",
+    image: "/projects/edufarm/home.png",
     description:
-      "A digital agriculture learning app with modules, video materials, and plant care reminders.",
+      "A digital agriculture learning app with training modules, progress tracking, and live mentor sessions.",
     role: "Android Developer",
     stack: ["Kotlin", "Jetpack Compose", "Retrofit"],
-    highlight: "Mobile Learning App",
+    highlight: "Agriculture Learning App",
     link: "/projects/edufarm",
   },
 ];

@@ -18,7 +18,7 @@ const stats = [
   },
   {
     value: "4+",
-    label: "Project Areas",
+    label: "Tech Areas",
   },
   {
     value: "3.95/4",
@@ -87,11 +87,11 @@ export default function About() {
           </p>
 
           <p>
-            I have worked on interactive data analytics systems, virtual office
-            platforms, digital learning apps, clinic management concepts, and
-            IoT color synchronization systems. My goal is to keep growing as a
-            developer who can build{" "}
-            <strong>useful, efficient, and impactful digital solutions.</strong>
+            My project experience includes data analytics dashboards, virtual
+            workspace platforms, agriculture learning apps, clinic management
+            systems, and IoT-based color matching solutions. I aim to keep
+            growing as a developer who builds{" "}
+            <strong>useful, reliable, and real-world digital solutions.</strong>
           </p>
         </motion.div>
 
@@ -292,20 +292,31 @@ export default function About() {
           }
         }
 
-        @media (max-width: 480px) {
-          .about-content p {
-            font-size: 0.96rem;
-          }
+@media (max-width: 480px) {
+  .about-section {
+    padding: 84px 0;
+  }
 
-          .about-stats {
-            grid-template-columns: 1fr;
-            gap: 32px;
-          }
+  .about-content p {
+    font-size: 0.96rem;
+    line-height: 1.75;
+  }
 
-          .stat-item h3 {
-            font-size: 2.35rem;
-          }
-        }
+  .about-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 18px;
+    margin-top: 52px;
+  }
+
+  .stat-item h3 {
+    font-size: 2.1rem;
+  }
+
+  .stat-item p {
+    font-size: 0.68rem;
+    letter-spacing: 0.13em;
+  }
+}
       `}</style>
     </section>
   );

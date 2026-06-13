@@ -31,7 +31,7 @@ const skillCategories = [
   {
     icon: "🛠️",
     title: "Tools",
-    skills: ["Git", "GitHub", "Docker", "Figma", "Postman", ],
+    skills: ["Git", "GitHub", "Docker", "Figma", "Postman"],
   },
 ];
 
@@ -197,7 +197,7 @@ export default function Skills() {
 
         .skill-card {
           position: relative;
-          min-height: 230px;
+          min-height: 210px;
           padding: 32px;
           border-radius: 22px;
           overflow: hidden;

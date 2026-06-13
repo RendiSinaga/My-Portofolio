@@ -70,8 +70,8 @@ export default function StarBackground() {
 
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden bg-[#050816]">
-      <div className="absolute -left-32 -top-32 h-[420px] w-[420px] rounded-full bg-cyan-500/10 blur-[90px]" />
-      <div className="absolute -bottom-40 -right-40 h-[520px] w-[520px] rounded-full bg-indigo-500/10 blur-[90px]" />
+      <div className="absolute -left-32 -top-32 h-105 w-105 rounded-full bg-cyan-500/10 blur-[90px]" />
+      <div className="absolute -bottom-40 -right-40 h-130 w-130 rounded-full bg-indigo-500/10 blur-[90px]" />
 
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
     </div>

@@ -13,6 +13,7 @@ const project = {
   client: "UPHF International Office",
   image: "/projects/clarity/clarity-logo.png",
   demoLink: "https://youtu.be/z_HbitSwZqs?si=gt7_aeKpr46Q0bYs",
+  githubLink: "",
   overview:
     "Clarity is a web-based interactive data analytics system developed to help monitor activity progress, manage structured data, and present insights through visual dashboards.",
   problem:
@@ -69,28 +70,35 @@ const gallery = [
     image: "/projects/clarity/add-activity.png",
   },
   {
-    title: "PBL Expo Poster",
+    title: "Poster",
     type: "Poster",
     image: "/projects/clarity/poster-clarity.png",
-    isPoster: true,
   },
 ];
 
 const fadeUp = (delay = 0) => ({
   hidden: {
     opacity: 0,
-    y: 24,
+    y: 22,
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
+      duration: 0.55,
       ease: "easeOut",
       delay,
     },
   },
 });
+
+function GithubIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 3.8a8.2 8.2 0 0 0-2.6 16c.4.1.5-.2.5-.4v-1.5c-2.2.5-2.7-.9-2.7-.9-.4-.9-.9-1.1-.9-1.1-.7-.5.1-.5.1-.5.8.1 1.3.9 1.3.9.7 1.2 1.9.8 2.3.6.1-.5.3-.8.5-1-1.8-.2-3.6-.9-3.6-4a3.1 3.1 0 0 1 .8-2.2c-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.3.8a7.9 7.9 0 0 1 4.2 0c1.6-1 2.3-.8 2.3-.8.5 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.2 0 3.1-1.9 3.8-3.6 4 .3.2.5.7.5 1.4v2.1c0 .2.1.5.5.4A8.2 8.2 0 0 0 12 3.8Z" />
+    </svg>
+  );
+}
 
 export default function ClarityDetail() {
   const [selectedIndex, setSelectedIndex] = useState(null);
@@ -153,7 +161,7 @@ export default function ClarityDetail() {
           <div className="hero-grid">
             <motion.div
               className="hero-content"
-              variants={fadeUp(0.1)}
+              variants={fadeUp(0.08)}
               initial="hidden"
               animate="visible"
             >
@@ -165,23 +173,49 @@ export default function ClarityDetail() {
 
               <p className="hero-description">{project.overview}</p>
 
-              <a
-                href={project.demoLink}
-                target="_blank"
-                rel="noreferrer"
-                className="demo-card"
+              <div
+                className={`hero-actions ${
+                  project.githubLink ? "" : "single-action"
+                }`}
               >
-                <div className="demo-icon">
-                  <span>▶</span>
-                </div>
+                <a
+                  href={project.demoLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="action-card"
+                >
+                  <div className="action-icon">
+                    <span>▶</span>
+                  </div>
 
-                <div className="demo-content">
-                  <span>Demo Video</span>
-                  <p>Watch Clarity in action</p>
-                </div>
+                  <div className="action-content">
+                    <span>Demo Video</span>
+                    <p>Watch Clarity in action</p>
+                  </div>
 
-                <div className="demo-arrow">↗</div>
-              </a>
+                  <div className="action-arrow">↗</div>
+                </a>
+
+                {project.githubLink && (
+                  <a
+                    href={project.githubLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="action-card"
+                  >
+                    <div className="action-icon">
+                      <GithubIcon />
+                    </div>
+
+                    <div className="action-content">
+                      <span>Source Code</span>
+                      <p>View project on GitHub</p>
+                    </div>
+
+                    <div className="action-arrow">↗</div>
+                  </a>
+                )}
+              </div>
 
               <div className="hero-meta">
                 <div>
@@ -203,7 +237,7 @@ export default function ClarityDetail() {
 
             <motion.div
               className="hero-preview"
-              variants={fadeUp(0.2)}
+              variants={fadeUp(0.16)}
               initial="hidden"
               animate="visible"
             >
@@ -234,7 +268,7 @@ export default function ClarityDetail() {
 
             <motion.div
               className="section-block"
-              variants={fadeUp(0.1)}
+              variants={fadeUp(0.08)}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
@@ -265,7 +299,7 @@ export default function ClarityDetail() {
               <motion.div
                 key={item}
                 className="contribution-item"
-                variants={fadeUp(0.08 + index * 0.06)}
+                variants={fadeUp(0.06 + index * 0.05)}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
@@ -301,7 +335,7 @@ export default function ClarityDetail() {
             </motion.div>
 
             <motion.div
-              variants={fadeUp(0.1)}
+              variants={fadeUp(0.08)}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
@@ -337,8 +371,8 @@ export default function ClarityDetail() {
               <motion.button
                 type="button"
                 key={item.title}
-                className={`gallery-item ${item.isPoster ? "is-poster" : ""}`}
-                variants={fadeUp(0.1 + index * 0.08)}
+                className="gallery-item"
+                variants={fadeUp(0.08 + index * 0.06)}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
@@ -419,9 +453,7 @@ export default function ClarityDetail() {
           </button>
 
           <div
-            className={`gallery-lightbox-content ${
-              selectedImage.isPoster ? "is-poster" : ""
-            }`}
+            className="gallery-lightbox-content"
             onClick={(event) => event.stopPropagation()}
           >
             <img
@@ -466,34 +498,34 @@ export default function ClarityDetail() {
           position: fixed;
           pointer-events: none;
           border-radius: 999px;
-          filter: blur(64px);
-          opacity: 0.14;
+          filter: blur(60px);
+          opacity: 0.13;
           z-index: 0;
         }
 
         .detail-glow-left {
-          width: 380px;
-          height: 380px;
+          width: 360px;
+          height: 360px;
           left: -170px;
-          top: 16%;
+          top: 12%;
           background: rgba(56, 189, 248, 0.22);
         }
 
         .detail-glow-right {
-          width: 420px;
-          height: 420px;
+          width: 400px;
+          height: 400px;
           right: -190px;
           bottom: 10%;
           background: rgba(129, 140, 248, 0.2);
         }
 
         .detail-hero {
-          padding: 92px 0 64px;
+          padding: 64px 0 56px;
         }
 
         .back-link {
           display: inline-flex;
-          margin-bottom: 34px;
+          margin-bottom: 26px;
           color: #67e8f9;
           font-size: 14px;
           font-weight: 800;
@@ -506,8 +538,8 @@ export default function ClarityDetail() {
 
         .hero-grid {
           display: grid;
-          grid-template-columns: 1fr 0.95fr;
-          gap: 64px;
+          grid-template-columns: 1fr 0.92fr;
+          gap: 60px;
           align-items: center;
         }
 
@@ -517,16 +549,16 @@ export default function ClarityDetail() {
           font-weight: 900;
           letter-spacing: 0.22em;
           text-transform: uppercase;
-          margin-bottom: 18px;
+          margin-bottom: 16px;
         }
 
         .hero-content h1 {
           color: #ffffff;
-          font-size: clamp(3rem, 6vw, 4.8rem);
+          font-size: clamp(3rem, 5.6vw, 4.6rem);
           line-height: 0.95;
           font-weight: 900;
           letter-spacing: -0.07em;
-          margin-bottom: 18px;
+          margin-bottom: 16px;
         }
 
         .hero-content h2 {
@@ -535,28 +567,38 @@ export default function ClarityDetail() {
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
-          font-size: clamp(1.35rem, 2.7vw, 1.9rem);
+          font-size: clamp(1.3rem, 2.55vw, 1.85rem);
           line-height: 1.28;
           font-weight: 850;
-          margin-bottom: 24px;
+          margin-bottom: 22px;
         }
 
         .hero-description {
           max-width: 580px;
           color: #94a3b8;
-          font-size: clamp(0.98rem, 1.4vw, 1.05rem);
-          line-height: 1.78;
+          font-size: clamp(0.96rem, 1.35vw, 1.04rem);
+          line-height: 1.75;
+          margin-bottom: 24px;
+        }
+
+        .hero-actions {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 14px;
+          max-width: 600px;
           margin-bottom: 28px;
         }
 
-        .demo-card {
-          width: min(100%, 430px);
+        .hero-actions.single-action {
+          grid-template-columns: minmax(0, 430px);
+        }
+
+        .action-card {
           display: grid;
-          grid-template-columns: 52px 1fr auto;
+          grid-template-columns: 46px 1fr auto;
           align-items: center;
-          gap: 16px;
-          padding: 16px 18px;
-          margin-bottom: 30px;
+          gap: 14px;
+          padding: 15px;
           border-radius: 20px;
           text-decoration: none;
           background:
@@ -574,54 +616,61 @@ export default function ClarityDetail() {
             box-shadow 0.25s ease;
         }
 
-        .demo-card:hover {
+        .action-card:hover {
           transform: translateY(-4px);
           border-color: rgba(56, 189, 248, 0.38);
           box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
         }
 
-        .demo-icon {
-          width: 52px;
-          height: 52px;
+        .action-icon {
+          width: 46px;
+          height: 46px;
           display: flex;
           align-items: center;
           justify-content: center;
-          border-radius: 16px;
+          border-radius: 15px;
           color: #020617;
           background: linear-gradient(135deg, #38bdf8, #818cf8);
           box-shadow: 0 14px 32px rgba(56, 189, 248, 0.22);
         }
 
-        .demo-icon span {
-          font-size: 15px;
+        .action-icon span {
+          font-size: 14px;
           margin-left: 2px;
         }
 
-        .demo-content span {
+        .action-icon svg {
+          width: 24px;
+          height: 24px;
+          fill: currentColor;
+        }
+
+        .action-content span {
           display: block;
           color: #38bdf8;
-          font-size: 11px;
+          font-size: 10px;
           font-weight: 900;
-          letter-spacing: 0.16em;
+          letter-spacing: 0.14em;
           text-transform: uppercase;
           margin-bottom: 6px;
         }
 
-        .demo-content p {
+        .action-content p {
           color: #ffffff;
-          font-size: 15px;
+          font-size: 13.5px;
+          line-height: 1.35;
           font-weight: 800;
           margin: 0;
         }
 
-        .demo-arrow {
+        .action-arrow {
           color: #67e8f9;
-          font-size: 18px;
+          font-size: 17px;
           font-weight: 900;
           transition: transform 0.22s ease;
         }
 
-        .demo-card:hover .demo-arrow {
+        .action-card:hover .action-arrow {
           transform: translate(3px, -3px);
         }
 
@@ -632,7 +681,7 @@ export default function ClarityDetail() {
         }
 
         .hero-meta div {
-          padding-top: 18px;
+          padding-top: 16px;
           border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -649,7 +698,7 @@ export default function ClarityDetail() {
         .hero-meta p {
           color: #e2e8f0;
           font-size: 13px;
-          line-height: 1.55;
+          line-height: 1.5;
           font-weight: 700;
         }
 
@@ -658,7 +707,7 @@ export default function ClarityDetail() {
           align-items: center;
           justify-content: center;
           overflow: hidden;
-          min-height: 360px;
+          min-height: 330px;
           padding: 28px;
           border-radius: 28px;
           background: rgba(15, 23, 42, 0.72);
@@ -675,7 +724,7 @@ export default function ClarityDetail() {
         }
 
         .detail-section {
-          padding: 68px 0;
+          padding: 64px 0;
         }
 
         .section-grid {
@@ -685,7 +734,7 @@ export default function ClarityDetail() {
         }
 
         .section-block {
-          padding: 32px 0;
+          padding: 30px 0;
           border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -835,10 +884,6 @@ export default function ClarityDetail() {
           background: rgba(15, 23, 42, 0.8);
         }
 
-        .gallery-item.is-poster .gallery-image-wrap {
-          height: 420px;
-        }
-
         .gallery-image-wrap img {
           width: 100%;
           height: 100%;
@@ -846,11 +891,6 @@ export default function ClarityDetail() {
           object-position: top center;
           display: block;
           transition: transform 0.35s ease;
-        }
-
-        .gallery-item.is-poster .gallery-image-wrap img {
-          object-fit: contain;
-          background: #ffffff;
         }
 
         .gallery-item:hover .gallery-image-wrap img {
@@ -903,7 +943,7 @@ export default function ClarityDetail() {
         }
 
         .detail-cta {
-          padding: 68px 0 110px;
+          padding: 64px 0 104px;
         }
 
         .cta-box {
@@ -977,10 +1017,6 @@ export default function ClarityDetail() {
           box-shadow: 0 28px 90px rgba(0, 0, 0, 0.48);
         }
 
-        .gallery-lightbox-content.is-poster img {
-          max-height: 82vh;
-        }
-
         .gallery-lightbox-content p {
           color: #cbd5e1;
           font-size: 15px;
@@ -1039,19 +1075,19 @@ export default function ClarityDetail() {
 
         @media (max-width: 980px) {
           .detail-hero {
-            padding: 86px 0 58px;
+            padding: 58px 0 50px;
           }
 
           .hero-grid,
           .section-grid,
           .two-column {
             grid-template-columns: 1fr;
-            gap: 42px;
+            gap: 38px;
           }
 
           .hero-preview {
-            min-height: 320px;
-            padding: 26px;
+            min-height: 300px;
+            padding: 24px;
           }
 
           .hero-preview img {
@@ -1065,45 +1101,64 @@ export default function ClarityDetail() {
           .gallery-image-wrap {
             height: 240px;
           }
-
-          .gallery-item.is-poster .gallery-image-wrap {
-            height: 520px;
-          }
         }
 
         @media (max-width: 640px) {
           .detail-hero {
-            padding: 78px 0 48px;
+            padding: 44px 0 42px;
           }
 
           .back-link {
-            margin-bottom: 28px;
+            margin-bottom: 22px;
           }
 
-          .detail-section {
-            padding: 54px 0;
+          .detail-label {
+            margin-bottom: 13px;
           }
 
           .hero-content h1 {
-            font-size: 3rem;
+            font-size: 2.7rem;
+            margin-bottom: 13px;
           }
 
-          .demo-card {
-            grid-template-columns: 48px 1fr auto;
-            padding: 15px;
+          .hero-content h2 {
+            font-size: 1.35rem;
+            margin-bottom: 18px;
           }
 
-          .demo-icon {
-            width: 48px;
-            height: 48px;
+          .hero-description {
+            line-height: 1.72;
+            margin-bottom: 20px;
           }
 
-          .demo-content p {
+          .hero-actions,
+          .hero-actions.single-action {
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 24px;
+          }
+
+          .action-card {
+            grid-template-columns: 46px 1fr auto;
+            padding: 14px;
+          }
+
+          .action-icon {
+            width: 46px;
+            height: 46px;
+          }
+
+          .action-content p {
             font-size: 14px;
           }
 
           .hero-meta {
             grid-template-columns: 1fr;
+            gap: 14px;
+          }
+
+          .detail-section {
+            padding: 52px 0;
           }
 
           .contribution-item {
@@ -1112,8 +1167,8 @@ export default function ClarityDetail() {
           }
 
           .hero-preview {
-            min-height: 280px;
-            padding: 22px;
+            min-height: 250px;
+            padding: 20px;
             border-radius: 22px;
           }
 
@@ -1126,10 +1181,6 @@ export default function ClarityDetail() {
             height: 210px;
           }
 
-          .gallery-item.is-poster .gallery-image-wrap {
-            height: 420px;
-          }
-
           .gallery-view-hint {
             opacity: 1;
           }
@@ -1139,7 +1190,7 @@ export default function ClarityDetail() {
           }
 
           .detail-cta {
-            padding: 54px 0 96px;
+            padding: 52px 0 92px;
           }
 
           .gallery-lightbox {
@@ -1149,10 +1200,6 @@ export default function ClarityDetail() {
           .gallery-lightbox-content img {
             max-height: 68vh;
             border-radius: 12px;
-          }
-
-          .gallery-lightbox-content.is-poster img {
-            max-height: 72vh;
           }
 
           .gallery-lightbox-content p {
