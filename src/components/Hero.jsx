@@ -1,131 +1,245 @@
-// components/Hero.jsx
 "use client";
 
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen overflow-hidden">
-      <div className="flex min-h-screen w-full flex-col-reverse items-center justify-center gap-16 pt-32 md:flex-row md:justify-between md:pt-28">
-        {/* Text Content */}
-        <div className="w-full max-w-[560px] text-center md:text-left">
-          <p
-            style={{ letterSpacing: "0.25em" }}
-            className="mb-5 text-[11px] font-semibold uppercase text-[#38BDF8] sm:text-xs"
+    <section
+      id="hero"
+      className="relative flex min-h-screen w-full justify-center"
+      style={{
+        alignItems: "flex-start",
+        paddingTop: "clamp(155px, 18vh, 190px)",
+        paddingBottom: "80px",
+      }}
+    >
+      {/* Ambient glow */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 50% at 65% 50%, rgba(14,165,233,0.08) 0%, transparent 70%)",
+        }}
+      />
+
+      <div className="container-main relative z-10 w-full">
+        <div className="flex flex-col-reverse items-center justify-between gap-14 lg:flex-row lg:gap-20">
+          {/* LEFT CONTENT */}
+          <div className="flex flex-1 flex-col items-center text-center lg:items-start lg:text-left">
+            <motion.p
+              className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-cyan-400 sm:text-sm"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              Software Engineering Student
+            </motion.p>
+
+            <motion.div
+              style={{ marginBottom: "32px" }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <h1
+                className="font-bold leading-tight text-white"
+                style={{ fontSize: "clamp(2.25rem, 9vw, 3.8rem)" }}
+              >
+                Hi, I'm
+              </h1>
+
+              <h1
+                className="font-extrabold leading-tight"
+                style={{
+                  fontSize: "clamp(2.65rem, 11vw, 4.4rem)",
+                  background: "linear-gradient(135deg, #38bdf8, #818cf8)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                Rendi Sinaga
+              </h1>
+            </motion.div>
+
+            <motion.p
+              className="text-slate-400"
+              style={{
+                fontSize: "clamp(0.95rem, 3.8vw, 1.08rem)",
+                maxWidth: "520px",
+                lineHeight: 1.9,
+                marginBottom: "46px",
+              }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.35 }}
+            >
+              I create practical digital solutions through web, mobile, and IoT
+              development, focusing on clean user experiences, reliable
+              features, and real-world use.
+            </motion.p>
+
+            <motion.div
+              className="flex flex-wrap justify-center gap-4 lg:justify-start"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+            >
+              <a
+                href="#projects"
+                className="group flex items-center gap-2 rounded-xl font-bold text-white transition-all duration-200 hover:scale-105"
+                style={{
+                  fontSize: "0.95rem",
+                  padding: "14px 32px",
+                  background: "linear-gradient(135deg, #0ea5e9, #6366f1)",
+                  boxShadow: "0 0 30px rgba(14,165,233,0.3)",
+                }}
+              >
+                View Projects
+                <span className="transition-transform duration-200 group-hover:translate-x-1">
+                  →
+                </span>
+              </a>
+
+              <a
+                href="#contact"
+                className="flex items-center gap-2 rounded-xl font-bold text-white transition-all duration-200 hover:scale-105"
+                style={{
+                  fontSize: "0.95rem",
+                  padding: "14px 32px",
+                  background: "rgba(255,255,255,0.05)",
+                  border: "1.5px solid rgba(255,255,255,0.15)",
+                }}
+              >
+                Contact Me
+              </a>
+            </motion.div>
+          </div>
+
+          {/* RIGHT PHOTO */}
+          <motion.div
+            className="flex shrink-0 items-center justify-center"
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
           >
-            ✦ Welcome To My Universe
-          </p>
-
-          <h1 className="mb-5 text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Hi, I&apos;m
-            <span className="block bg-gradient-to-r from-[#38BDF8] to-[#7DD3FC] bg-clip-text text-transparent">
-              Rendi Sinaga
-            </span>
-          </h1>
-
-          <h2 className="mb-5 text-lg font-semibold text-slate-300 sm:text-xl">
-            Software Engineering Student
-          </h2>
-
-          <p className="mx-auto mb-8 max-w-lg text-sm leading-7 text-slate-400 sm:text-base md:mx-0">
-            Passionate about building modern web applications, mobile apps, and
-            futuristic digital experiences with clean design and scalable
-            technology.
-          </p>
-
-          {/* Buttons */}
-          <div className="mb-7 flex flex-wrap items-center justify-center gap-4 md:justify-start">
-            <a
-              href="#projects"
-              className="rounded-full bg-[#38BDF8] px-6 py-3 text-sm font-bold text-[#050816] shadow-lg shadow-sky-500/20 transition-all hover:-translate-y-1 hover:bg-[#7DD3FC] hover:shadow-sky-500/30"
+            <div
+              className="relative flex items-center justify-center"
+              style={{
+                width: "clamp(250px, 62vw, 410px)",
+                height: "clamp(250px, 62vw, 410px)",
+              }}
             >
-              View Projects →
-            </a>
+              {/* Orbit rings */}
+              {[
+                {
+                  size: "108%",
+                  color: "rgba(56,189,248,0.18)",
+                  duration: 24,
+                },
+                {
+                  size: "124%",
+                  color: "rgba(99,102,241,0.12)",
+                  duration: 32,
+                  dashed: true,
+                  reverse: true,
+                },
+              ].map((ring, index) => (
+                <motion.div
+                  key={index}
+                  className="pointer-events-none absolute rounded-full"
+                  style={{
+                    width: ring.size,
+                    height: ring.size,
+                    top: "50%",
+                    left: "50%",
+                    translateX: "-50%",
+                    translateY: "-50%",
+                    border: ring.dashed
+                      ? `1px dashed ${ring.color}`
+                      : `1px solid ${ring.color}`,
+                  }}
+                  animate={{ rotate: ring.reverse ? -360 : 360 }}
+                  transition={{
+                    duration: ring.duration,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                />
+              ))}
 
-            <a
-              href="#contact"
-              className="rounded-full border border-white/15 px-6 py-3 text-sm font-semibold text-slate-300 transition-all hover:-translate-y-1 hover:border-[#38BDF8]/50 hover:text-[#38BDF8]"
-            >
-              Contact Me
-            </a>
-          </div>
+              {/* Glow */}
+              <div
+                className="absolute rounded-full"
+                style={{
+                  width: "75%",
+                  height: "75%",
+                  background:
+                    "radial-gradient(circle, rgba(14,165,233,0.2) 0%, transparent 70%)",
+                  filter: "blur(28px)",
+                }}
+              />
 
-          {/* Social Links */}
-          <div className="flex items-center justify-center gap-4 text-xs font-mono md:justify-start">
-            <a
-              href="https://github.com/"
-              target="_blank"
-              rel="noreferrer"
-              className="text-slate-500 transition hover:text-white"
-            >
-              GitHub ↗
-            </a>
+              {/* Photo */}
+              <div
+                className="relative z-10 overflow-hidden rounded-full"
+                style={{
+                  width: "clamp(175px, 45vw, 300px)",
+                  height: "clamp(175px, 45vw, 300px)",
+                  border: "2px solid rgba(56,189,248,0.4)",
+                  boxShadow: "0 0 48px rgba(14,165,233,0.25)",
+                }}
+              >
+                <Image
+                  src="/profile.jpg"
+                  alt="Rendi Sinaga"
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 175px, 300px"
+                  className="object-cover object-top"
+                />
+              </div>
 
-            <span className="h-3 w-px bg-slate-700" />
-
-            <a
-              href="https://linkedin.com/"
-              target="_blank"
-              rel="noreferrer"
-              className="text-slate-500 transition hover:text-white"
-            >
-              LinkedIn ↗
-            </a>
-          </div>
-        </div>
-
-        {/* Profile Image */}
-        <div className="relative flex w-full max-w-90 shrink-0 items-center justify-center">
-          {/* Glow */}
-          <div className="absolute h-72 w-72 rounded-full bg-[#38BDF8]/10 blur-3xl" />
-
-          {/* Animated Rings */}
-          <div className="absolute h-[280px] w-[280px] rounded-full border border-[#38BDF8]/25 animate-spin-slow sm:h-[320px] sm:w-[320px]" />
-          <div className="absolute h-[315px] w-[315px] rounded-full border border-dashed border-violet-400/20 animate-spin-reverse sm:h-[360px] sm:w-[360px]" />
-
-          {/* Photo */}
-          <div className="relative h-[250px] w-[250px] overflow-hidden rounded-full border-2 border-[#38BDF8]/30 bg-[#38BDF8]/5 shadow-[0_0_70px_rgba(56,189,248,0.18)] sm:h-[290px] sm:w-[290px]">
-            <Image
-              src="/foto.jpg"
-              alt="Rendi Sinaga"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-
-          {/* Badge */}
-          <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-[#38BDF8]/20 bg-[#050816]/90 px-5 py-2 text-xs font-semibold text-[#38BDF8] shadow-lg shadow-black/30 backdrop-blur-md">
-            💻 Software Engineer
-          </div>
+              {/* Badge */}
+              <motion.div
+                className="absolute z-20 flex items-center gap-2 rounded-full font-semibold text-cyan-200"
+                style={{
+                  bottom: "-8px",
+                  left: "50%",
+                  translateX: "-50%",
+                  padding: "8px 18px",
+                  fontSize: "0.72rem",
+                  background: "rgba(6,182,212,0.12)",
+                  border: "1px solid rgba(6,182,212,0.3)",
+                  backdropFilter: "blur(12px)",
+                  WebkitBackdropFilter: "blur(12px)",
+                  whiteSpace: "nowrap",
+                }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.9 }}
+              >
+                💻 Software Developer
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
       </div>
 
       <style>{`
-        @keyframes spinSlow {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-
-        @keyframes spinReverse {
-          from {
-            transform: rotate(360deg);
-          }
-          to {
-            transform: rotate(0deg);
+        @media (min-width: 1024px) {
+          #hero {
+            align-items: center !important;
+            padding-top: 120px !important;
+            padding-bottom: 80px !important;
           }
         }
 
-        .animate-spin-slow {
-          animation: spinSlow 18s linear infinite;
-        }
-
-        .animate-spin-reverse {
-          animation: spinReverse 26s linear infinite;
+        @media (max-width: 480px) {
+          #hero {
+            padding-top: 170px !important;
+          }
         }
       `}</style>
     </section>

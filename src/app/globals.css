@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 :root {
+  --container-width: min(100%, 1200px);
+  --container-px: clamp(24px, 5vw, 80px);
   --background: #050816;
   --card: #0B1120;
   --primary: #38BDF8;
@@ -23,4 +25,21 @@ body {
   background: var(--background);
   color: var(--text);
   overflow-x: hidden;
+}
+
+.container-main {
+  width: var(--container-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-px);
+  padding-right: var(--container-px);
+}
+
+section {
+  scroll-margin-top: 100px;
+}
+
+::selection {
+  background: rgba(56, 189, 248, 0.25);
+  color: #ffffff;
 }

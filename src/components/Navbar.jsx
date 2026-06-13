@@ -1,10 +1,12 @@
 "use client";
+
 import { useState, useEffect } from "react";
 
 const links = [
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
+  { label: "Awards", href: "#awards" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -14,37 +16,69 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
 
-    onScroll();
-    window.addEventListener("scroll", onScroll);
+      setScrolled(scrollY > 20);
 
-    return () => window.removeEventListener("scroll", onScroll);
+      // Supaya saat masih di Hero, tidak ada menu yang aktif
+      if (scrollY < 320) {
+        setActive("");
+        return;
+      }
+
+      let currentActive = "";
+
+      links.forEach(({ href }) => {
+        const section = document.querySelector(href);
+
+        if (!section) return;
+
+        const rect = section.getBoundingClientRect();
+
+        if (rect.top <= 160 && rect.bottom >= 160) {
+          currentActive = href;
+        }
+      });
+
+      setActive(currentActive);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    const observers = links.map(({ href }) => {
-      const id = href.replace("#", "");
-      const el = document.getElementById(id);
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
 
-      if (!el) return null;
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActive(href);
-        },
-        {
-          threshold: 0.45,
-          rootMargin: "-80px 0px -45% 0px",
-        },
-      );
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setOpen(false);
+      }
+    };
 
-      obs.observe(el);
-      return obs;
-    });
+    window.addEventListener("resize", handleResize);
 
-    return () => observers.forEach((observer) => observer?.disconnect());
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const handleBackHome = () => {
+    setActive("");
+    setOpen(false);
+  };
 
   return (
     <header
@@ -56,14 +90,33 @@ export default function Navbar() {
         zIndex: 999,
         display: "flex",
         justifyContent: "center",
-        padding: scrolled ? "14px 20px" : "22px 20px",
+        padding: scrolled ? "12px 20px" : "18px 20px",
         transition: "all 0.3s ease",
         pointerEvents: "none",
       }}
     >
+      {/* Mobile dark overlay */}
+      {open && (
+        <div
+          className="mobile-overlay"
+          onClick={() => setOpen(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 998,
+            background: "rgba(2, 6, 23, 0.48)",
+            backdropFilter: "blur(3px)",
+            WebkitBackdropFilter: "blur(3px)",
+            pointerEvents: "auto",
+          }}
+        />
+      )}
+
       <nav
         style={{
-          width: "min(100%, 980px)",
+          position: "relative",
+          zIndex: 1000,
+          width: "var(--container-width)",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
@@ -73,11 +126,9 @@ export default function Navbar() {
           pointerEvents: "auto",
           backdropFilter: "blur(18px)",
           WebkitBackdropFilter: "blur(18px)",
-          background: scrolled
-            ? "rgba(5, 8, 22, 0.82)"
-            : "rgba(5, 8, 22, 0.45)",
+          background: scrolled ? "rgba(5, 8, 22, 0.84)" : "rgba(5, 8, 22, 0.5)",
           border: scrolled
-            ? "1px solid rgba(56, 189, 248, 0.22)"
+            ? "1px solid rgba(56, 189, 248, 0.24)"
             : "1px solid rgba(255, 255, 255, 0.1)",
           boxShadow: scrolled
             ? "0 18px 50px rgba(0, 0, 0, 0.35)"
@@ -87,8 +138,9 @@ export default function Navbar() {
       >
         {/* Brand */}
         <a
-          href="#"
+          href="#hero"
           aria-label="Back to home"
+          onClick={handleBackHome}
           style={{
             display: "flex",
             alignItems: "center",
@@ -112,7 +164,8 @@ export default function Navbar() {
               background:
                 "linear-gradient(135deg, rgba(56,189,248,0.18), rgba(56,189,248,0.04))",
               border: "1px solid rgba(56,189,248,0.35)",
-              boxShadow: "inset 0 0 18px rgba(56,189,248,0.08)",
+              boxShadow:
+                "inset 0 0 18px rgba(56,189,248,0.08), 0 0 18px rgba(56,189,248,0.08)",
             }}
           >
             R
@@ -197,10 +250,11 @@ export default function Navbar() {
           })}
         </div>
 
-        {/* CTA */}
+        {/* Desktop CTA */}
         <a
           className="desktop-cta"
           href="#contact"
+          onClick={() => setActive("#contact")}
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -235,16 +289,22 @@ export default function Navbar() {
           className="mobile-toggle"
           type="button"
           aria-label="Toggle navigation menu"
+          aria-expanded={open}
+          aria-controls="mobile-menu"
           onClick={() => setOpen(!open)}
           style={{
             display: "none",
             width: "40px",
             height: "40px",
             borderRadius: "999px",
-            border: "1px solid rgba(255,255,255,0.1)",
-            background: "rgba(255,255,255,0.05)",
+            border: "1px solid rgba(56,189,248,0.18)",
+            background: open
+              ? "rgba(56,189,248,0.12)"
+              : "rgba(255,255,255,0.05)",
             color: "#E2E8F0",
             cursor: "pointer",
+            fontSize: "17px",
+            transition: "all 0.22s ease",
           }}
         >
           {open ? "✕" : "☰"}
@@ -252,6 +312,7 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         <div
+          id="mobile-menu"
           className="mobile-menu"
           style={{
             display: open ? "flex" : "none",
@@ -263,9 +324,10 @@ export default function Navbar() {
             gap: "8px",
             padding: "14px",
             borderRadius: "24px",
-            background: "rgba(5, 8, 22, 0.94)",
-            border: "1px solid rgba(255,255,255,0.1)",
-            boxShadow: "0 20px 50px rgba(0,0,0,0.45)",
+            background: "rgba(5, 8, 22, 0.98)",
+            border: "1px solid rgba(56,189,248,0.18)",
+            boxShadow:
+              "0 20px 50px rgba(0,0,0,0.5), 0 0 40px rgba(56,189,248,0.08)",
             backdropFilter: "blur(18px)",
             WebkitBackdropFilter: "blur(18px)",
           }}
@@ -277,17 +339,24 @@ export default function Navbar() {
               <a
                 key={href}
                 href={href}
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setActive(href);
+                  setOpen(false);
+                }}
                 style={{
                   padding: "12px 14px",
                   borderRadius: "14px",
                   textDecoration: "none",
                   fontSize: "14px",
-                  fontWeight: 600,
+                  fontWeight: 700,
                   color: isActive ? "#38BDF8" : "#CBD5E1",
                   background: isActive
                     ? "rgba(56,189,248,0.12)"
-                    : "rgba(255,255,255,0.03)",
+                    : "rgba(255,255,255,0.035)",
+                  border: isActive
+                    ? "1px solid rgba(56,189,248,0.18)"
+                    : "1px solid rgba(255,255,255,0.04)",
+                  transition: "all 0.22s ease",
                 }}
               >
                 {label}
@@ -297,7 +366,10 @@ export default function Navbar() {
 
           <a
             href="#contact"
-            onClick={() => setOpen(false)}
+            onClick={() => {
+              setActive("#contact");
+              setOpen(false);
+            }}
             style={{
               marginTop: "4px",
               padding: "12px 14px",
@@ -305,9 +377,10 @@ export default function Navbar() {
               textAlign: "center",
               textDecoration: "none",
               fontSize: "14px",
-              fontWeight: 800,
+              fontWeight: 900,
               color: "#020617",
-              background: "#38BDF8",
+              background: "linear-gradient(135deg, #38BDF8, #0EA5E9)",
+              boxShadow: "0 12px 30px rgba(56,189,248,0.24)",
             }}
           >
             Hire Me
@@ -329,10 +402,21 @@ export default function Navbar() {
           }
         }
 
+        @media (min-width: 769px) {
+          .mobile-overlay {
+            display: none !important;
+          }
+        }
+
         @media (max-width: 480px) {
           header {
             padding-left: 14px !important;
             padding-right: 14px !important;
+          }
+
+          .mobile-menu {
+            left: 14px !important;
+            right: 14px !important;
           }
         }
       `}</style>
